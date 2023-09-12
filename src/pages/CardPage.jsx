@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import Layout from '../Layout/Layout';
 import { useCard, useCardAction } from '../providers/CardProvider';
 import './cardPage.css';
@@ -42,7 +43,6 @@ const CardPage = () => {
             })}
           </section>
           <CardSummery total={total} card={card} />
-          {/* <cardSummery card={card} total={total} /> */}
         </section>
       </main>
     </Layout>
@@ -70,6 +70,9 @@ const CardSummery = ({ total, card }) => {
         <p>net price</p>
         <p>{total} $</p>
       </div>
+      <Link to="/checkout">
+        <button className="btn primary">Go To Checkout</button>
+      </Link>
     </section>
   );
 };

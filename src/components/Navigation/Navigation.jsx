@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import './Navigation.css';
-import { useCard } from '../providers/CardProvider';
+import { useCard } from '../../providers/CardProvider';
 const Navigation = () => {
   const { card } = useCard();
   return (
