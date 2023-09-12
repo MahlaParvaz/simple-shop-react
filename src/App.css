@@ -2,37 +2,91 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  list-style: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+body {
+  background-color: #f6f6f6;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.productList {
+  margin-top: 50px;
+  /* background-color: rgb(255, 184, 184); */
+  border-radius: 5px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-column-gap: 2rem;
+  grid-row-gap: 4rem;
+  /* max-width: 1170px; */
+  /* width: 90vw; */
+}
+
+.product {
+  border-radius: 5px;
+  padding-top: 10px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: #fff;
+  border: 1px solid #efefef;
+}
+.productImg {
+  width: 80%;
+}
+.productImg img {
+  width: 100%;
+  height: 210px;
+}
+
+.container {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  padding: 0 20px;
 }
 
-.App-link {
-  color: #61dafb;
+.productDesc {
+  padding: 10px;
+  display: flex;
+  width: 100%;
+  border-top: 1px solid #ccc;
+  justify-content: space-between;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.btn {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  padding: 6px 15px;
+  background-color: #ede9fe;
+  color: #6d28d9;
+  border-radius: 5px;
+}
+
+.primary {
+  background-color: #6d28d9;
+  color: #fff;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  background-color: #ccc;
+  color: #444;
+}
+
+.content {
+  display: grid;
+  margin: 0 auto;
+  gap: 1rem 3rem;
+  grid-template-columns: 23fr 77fr;
+  max-width: 1280px;
+}
+
+.content .content__aside {
+  /* background-color: #fff; */
 }
