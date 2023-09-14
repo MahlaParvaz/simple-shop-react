@@ -2,8 +2,10 @@ import Input from '../../common/Input';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import './signup.css';
-import { Link, withRouter } from 'react-router-dom';
+import { Link, useNavigate, withRouter } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { signupUser } from '../../services/singUpService';
+import { useAuth, useAuthActions } from '../../providers/AuthProvider';
 // import { signupUser } from '../../services/sinupService';
 // import { useAuthActions, useAuth } from '../../Providers/AuthProvider';
 // import { useQuery } from '../../hooks/useQuery';
@@ -39,12 +41,14 @@ const validationSchema = Yup.object({
     .oneOf([Yup.ref('password'), null], 'Passwords must match'),
 });
 
-const SignupForm = ({ history }) => {
+const SignupForm = () => {
   //   const query = useQuery();
   //   const redirect = query.get('redirect') || '/';
-  //   const setAuth = useAuthActions();
-  //   const auth = useAuth();
+  const setAuth = useAuthActions();
+  const auth = useAuth();
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
+
   //   useEffect(() => {
   //     if (auth) history.push(redirect);
   //   }, [redirect, auth]);
@@ -58,6 +62,19 @@ const SignupForm = ({ history }) => {
       phoneNumber,
       password,
     };
+    try {
+      const { data } = await signupUser(userData);
+      console.log(data);
+      setAuth(data);
+      localStorage.setItem('authState', JSON.stringify(data));
+      setError(null);
+      navigate('/');
+    } catch (error) {
+      // console.log(error);
+      if (error.response && error.response.data.message) {
+        setError(error.response.data.message);
+      }
+    }
     // try {
     //   const { data } = await signupUser(userData);
     //   setAuth(data);
@@ -109,6 +126,7 @@ const SignupForm = ({ history }) => {
         >
           Signup
         </button>
+        {error && <p style={{ color: 'red' }}>{error}</p>}
         {/* {error && <p style={{ color: 'red' }}>{error}</p>}
         <Link to={`/login?redirect=${redirect}`}>
           <p style={{ marginTop: '15px' }}>Already login?</p>
