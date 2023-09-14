@@ -2,14 +2,12 @@ import Input from '../../common/Input';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import './login.css';
-import { Link, useActionData, useNavigate, withRouter } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { loginUser } from '../../services/loginService';
 import { useState } from 'react';
 import { useAuth, useAuthActions } from '../../providers/AuthProvider';
-// import { useState, useEffect } from "react";
-// import { loginUser } from "../../services/loginService";
-// import { useAuthActions, useAuth } from "../../Providers/AuthProvider";
-// import { useQuery } from "../../hooks/useQuery";
+import { useQuery } from '../../hooks/useQuery';
+
 const initialValues = {
   email: '',
   password: '',
@@ -29,8 +27,8 @@ const LoginForm = () => {
   const auth = useAuth();
   const navigate = useNavigate();
   const [error, setError] = useState(null);
-  //   const query = useQuery();
-  //   const redirect = query.get("redirect") || "/";
+  const query = useQuery();
+  const redirect = query.get('redirect') || '/';
 
   //   useEffect(() => {
   //     if (auth) history.push(redirect);
@@ -40,9 +38,9 @@ const LoginForm = () => {
     try {
       const { data } = await loginUser(values);
       setAuth(data);
-      localStorage.setItem('authState', JSON.stringify(data));
+      // localStorage.setItem('authState', JSON.stringify(data));
       setError(null);
-      navigate('/');
+      navigate(redirect);
     } catch (error) {
       if (error.response && error.response.data.message)
         setError(error.response.data.message);
@@ -76,10 +74,9 @@ const LoginForm = () => {
           Login
         </button>
         {error && <p style={{ color: 'red' }}>{error}</p>}
-        {/* {error && <p style={{ color: "red" }}>{error}</p>}
         <Link to={`/signup?redirect=${redirect}`}>
-          <p style={{ marginTop: "15px" }}>Not signup yet ?</p>
-        </Link> */}
+          <p style={{ marginTop: '15px' }}>Not signup yet ?</p>
+        </Link>
       </form>
     </div>
   );
