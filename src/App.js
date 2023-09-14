@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import CardProvider from './providers/CardProvider';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import CheckOutPAge from './pages/CheckOutPage';
+import CheckOutPage from './pages/CheckOutPage';
 import LoginPage from './pages/LoginPage';
 import SignUpPage from './pages/SignUpPage';
 import AuthProvider from './providers/AuthProvider';
@@ -17,7 +17,7 @@ function App() {
           <ToastContainer />
           <Routes>
             <Route path="/card" element={<CardPage />} />
-            <Route path="/checkout" element={<CheckOutPAge />} />
+            <Route path="/checkout" element={<CheckOutPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignUpPage />} />
             <Route path="/" element={<HomePage />} />
