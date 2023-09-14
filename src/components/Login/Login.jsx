@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 import './login.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { loginUser } from '../../services/loginService';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAuth, useAuthActions } from '../../providers/AuthProvider';
 import { useQuery } from '../../hooks/useQuery';
 
@@ -30,9 +30,9 @@ const LoginForm = () => {
   const query = useQuery();
   const redirect = query.get('redirect') || '/';
 
-  //   useEffect(() => {
-  //     if (auth) history.push(redirect);
-  //   }, [redirect, auth]);
+  useEffect(() => {
+    if (auth) navigate(redirect);
+  }, [redirect, auth]);
 
   const onSubmit = async (values) => {
     try {
